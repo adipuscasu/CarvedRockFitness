@@ -14,10 +14,10 @@ namespace CarvedRockFitnessApi.Services
             this.orderRepository = orderRepository;
         }
 
-        public IEnumerable<RevenueInCurrency> BucketRevenueByCurrency()
+        public IEnumerable<RevenueInCurrency> GetRevenueByCurrency()
         {
             var orders = this.orderRepository.GetOrdersPlacedToday();
-            var orderValueByCurrency = GetOrderValueByCurrency(orders);
+            var orderValueByCurrency = BucketOrderValueByCurrency(orders);
 
             var revenueInCurrencyList = new List<RevenueInCurrency>();
             foreach (Currency currency in Enum.GetValues(typeof(Currency)))
@@ -38,7 +38,7 @@ namespace CarvedRockFitnessApi.Services
             return revenueInCurrencyList;
         }
 
-        private static Dictionary<Currency, decimal> GetOrderValueByCurrency(IEnumerable<Order> orders)
+        private static Dictionary<Currency, decimal> BucketOrderValueByCurrency(IEnumerable<Order> orders)
         {
             var orderValueByCurrency = new Dictionary<Currency, decimal>();
 
