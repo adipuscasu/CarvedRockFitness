@@ -14,7 +14,7 @@ namespace CarvedRockFitnessApi.Services
             this.orderRepository = orderRepository;
         }
 
-        public IEnumerable<RevenueInCurrency> GetRevenueByCurrency()
+        public IEnumerable<RevenueInCurrency> BucketRevenueByCurrency()
         {
             var orders = this.orderRepository.GetOrdersPlacedToday();
             var orderValueByCurrency = GetOrderValueByCurrency(orders);
